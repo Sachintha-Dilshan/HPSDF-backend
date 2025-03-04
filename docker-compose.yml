@@ -1,0 +1,28 @@
+services:
+  hpsdf-backend:
+    image: sachinthadilshan/hpsdf-backend:
+    container_name: hpsdf-backend-container
+    restart: on-failure
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/hpsdf?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 61574210
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - mysqldb
+  mysqldb:
+    image: mysql
+    container_name: hpsdf-db-container
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 61574210
+      MYSQL_DATABASE: hpsdf
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data: {}
+
