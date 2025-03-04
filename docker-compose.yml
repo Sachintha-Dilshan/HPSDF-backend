@@ -5,8 +5,6 @@ services:
     restart: always
     ports:
       - 3000:80
-    environment:
-      REACT_APP_BASE_URL: http://hpsdf-backend:8080
     depends_on:
       - hpsdf-backend
 
