@@ -1,4 +1,15 @@
 services:
+  hpsdf-frontend:
+    image: sachinthadilshan/hpsdf-frontend:
+    container_name: hpsdf-frontend-container
+    restart: always
+    ports:
+      - 3000:80
+    environment:
+      REACT_APP_BASE_URL: http://hpsdf-backend:8080
+    depends_on:
+      - hpsdf-backend
+
   hpsdf-backend:
     image: sachinthadilshan/hpsdf-backend:
     container_name: hpsdf-backend-container
@@ -12,6 +23,7 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     depends_on:
       - mysqldb
+
   mysqldb:
     image: mysql
     container_name: hpsdf-db-container
@@ -23,6 +35,7 @@ services:
       MYSQL_DATABASE: hpsdf
     volumes:
       - db_data:/var/lib/mysql
+
 volumes:
   db_data: {}
 
